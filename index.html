@@ -6,17 +6,18 @@
         <title>Product Comments</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="icon" href="img/favicon.png">
     </head>
     <body>
 
         <main class="container" ng-app="ProductReviewer" ng-controller="ReviewsController">
-            <section>
+            <section class="col-xs-12">
                 <img src="img/super-bass-o-matic-76.jpg" alt="product picture" class="product-picture">
                 <h1>The Super Bass-o-Matic '76</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia cumque deserunt ullam repudiandae nisi corporis! Ipsum, ducimus commodi, itaque porro distinctio consequuntur! Autem doloremque numquam nemo ex nulla tempora quis! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nihil doloribus excepturi quisquam error possimus veritatis facere, commodi cumque ab atque dolore ducimus obcaecati ipsa, impedit! Consequuntur, eligendi iure cumque!</p>
             </section>
 
-            <section>
+            <section class="col-xs-12">
                 <h2>Add a Comment</h2>
                 <!--  
                 put a form here for entering a new comment
@@ -26,9 +27,10 @@
                 http://angular-ui.github.io/bootstrap/#/rating
                 their script file is included below
                 -->
+                <rating ng-model="rate" max="max"></rating>
             </section>
 
-            <section>
+            <section class="col-xs-12">
                 <h2>Comments</h2>
                 <!-- 
                 display existing comments here
