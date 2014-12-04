@@ -1,8 +1,15 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+
 
 body {
-    font-family: 'Ubuntu', 'Helvetica Neue', 'Helvetica', sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', sans-serif;
     font-weight: 400;
+    /*background-color: gray;*/
+}
+
+main {
+	/*background-color: rgba(0,0,0,0.7);*/
 }
 
 .product-picture {
@@ -11,3 +18,10 @@ body {
     margin-right: 10px;
 }
 
+#rating {
+	font-size: 200%;
+}
+
+#comment-form {
+	/*background-color: rgba(255,255,255,0.7);*/
+}

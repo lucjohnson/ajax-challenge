@@ -13,7 +13,7 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 	})
 
 	.controller('ReviewsController', function($scope, $http) {
-		$scope.rate = 3;
+		$scope.rate = 0;
 		$scope.max = 5;
 
 		// $scope.hoveringOver = function(value) {
