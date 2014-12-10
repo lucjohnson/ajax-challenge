@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Product Comments</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
         <link rel="stylesheet" href="css/main.css">
         <link rel="icon" href="img/favicon.png">
     </head>
@@ -73,22 +74,29 @@
                 as well as delete it
                  -->
                  <p>
-                    <button class="btn btn-primary" ng-click=refreshReviews()"">Refresh</button>
+                    <button class="btn btn-primary" ng-click="refreshReviews()">Refresh</button>
                     <img src="img/ajax-spinner.gif" alt="loading animation" ng-if="loading || updating"/>
                  </p>
+           <!--       <section>
+                    <button class="btn btn-success glyphicon glyphicon-chevron-up"></button>
+                    <p>{{review.score}}</p>
+                    <button class="btn btn-danger glyphicon glyphicon-chevron-down"></button>
+                 </section> -->
 
-                 <table>
-                    <thead>
-                        <tr>
-                            <th>Review<th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="review in reviews">
-                            <td ng-class="{done: review.done}">{{review.title}} {{review.name}} {{review.rating}} {{review.body}}</td>
-                        </tr>
-                    </tbody>    
-                 </table>
+                 <section ng-repeat="review in reviews" class="col-sm-12">
+                    <div class="col-sm-2" id="comment-score">
+                        <p>
+                            <button class="btn btn-success glyphicon glyphicon-chevron-up" id="upvote"></button>
+                        </p>
+                        <p>{{review.score}}</p>
+                        <p>
+                            <button class="btn btn-danger glyphicon glyphicon-chevron-down" id="downvote"></button>
+                        </p>
+                    </div>
+                    <div class="col-sm-10">
+                        <p>Rating: {{review.rating}} Title: {{review.title}} Reviewer: {{review.name}} Comment: {{review.body}}</p>
+                    </div>
+                 </section>
             </section>
 
         </main>

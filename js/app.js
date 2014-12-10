@@ -27,7 +27,8 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 
 		$scope.refreshReviews = function () {
 			$scope.loading = true;
-			$http.get(reviewsUrl + '?where={"done" : false}')
+			// $http.get(reviewsUrl + '?where={"done" : false}')
+			$http.get(reviewsUrl)
 				.success(function(responseData) {
 					$scope.reviews = responseData.results;
 				})
@@ -49,7 +50,7 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 
 			$scope.refreshReviews();
 
-			$scope.newReview = {done: false};
+			$scope.newReview = {score: 0};
 
 			$scope.addReview = function(review) {
 				$http.post(reviewsUrl, review)
@@ -58,7 +59,7 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 
 						$scope.reviews.push(review);
 
-						$scope.newReview = {done: false};
+						$scope.newReview = {score: 0};
 					})
 			};
 	});
