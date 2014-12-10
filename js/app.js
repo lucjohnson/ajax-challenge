@@ -69,18 +69,20 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 			};
 
 			$scope.upvote = function(review) {
+				$scope.review = {score: review.score++};
 				$http.put(reviewsUrl + '/' + review.objectId, review)
 					.success(function() {
-						$scope.review = {score: review.score++};
+						
 					})
 			};
 
 			$scope.downvote = function(review) {
+				if (review.score != 0) {
+					$scope.review = {score: review.score--};
+				}
 				$http.put(reviewsUrl + '/' + review.objectId, review)
 					.success(function() {
-						if (review.score != 0) {
-							$scope.review = {score: review.score--};
-						}
+
 					})
 			}
 
