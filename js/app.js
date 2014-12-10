@@ -4,7 +4,7 @@
     define your module and controllers here
 */
 
-var tasksUrl = 'https://api.parse.com/1/classes/';
+var reviewsUrl = 'https://api.parse.com/1/classes/reviews';
 
 angular.module('ProductReviewer', ['ui.bootstrap'])
 	.config(function($httpProvider) {
@@ -13,7 +13,8 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 	})
 
 	.controller('ReviewsController', function($scope, $http) {
-		$scope.rate = 0;
+		
+		$scope.rating = 0;
 		$scope.max = 5;
 
 		// $scope.hoveringOver = function(value) {
@@ -23,6 +24,43 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 		$scope.ratingStates = [
 			{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
 		];
+
+		$scope.refreshReviews = function () {
+			$scope.loading = true;
+			$http.get(reviewsUrl + '?where={"done" : false}')
+				.success(function(responseData) {
+					$scope.reviews = responseData.results;
+				})
+				.error(function(err) {
+					console.log(err);
+				})
+				.finally(function() {
+					$scope.loading = false;
+				})
+		}; //$scope.refreshReviews
+
+		$http.get(reviewsUrl)
+			.success(function(data) {
+				$scope.reviews = data.results;
+			})
+			.error(function(err) {
+				console.log(err);
+			})
+
+			$scope.refreshReviews();
+
+			$scope.newReview = {done: false};
+
+			$scope.addReview = function(review) {
+				$http.post(reviewsUrl, review)
+					.success(function(responseData) {
+						review.objectId = responseData.objectId;
+
+						$scope.reviews.push(review);
+
+						$scope.newReview = {done: false};
+					})
+			};
 	});
 
 
