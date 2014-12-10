@@ -17,6 +17,7 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 		$scope.rating = 0;
 		$scope.max = 5;
 
+		$scope.newReview = {score: 0};
 		// $scope.hoveringOver = function(value) {
 		// 	$scope.overStar = value;
 		// };
@@ -49,7 +50,7 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 
 			$scope.refreshReviews();
 
-			$scope.newReview = {score: 0};
+			// $scope.newReview = {score: 0};
 
 			$scope.addReview = function(review) {
 				$scope.inserting = true;

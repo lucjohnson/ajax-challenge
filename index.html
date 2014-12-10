@@ -88,8 +88,16 @@
                             <span class="glyphicon glyphicon-chevron-down"></span>
                         </a>
                     </div>
-                    <div class="col-xs-8">
-                        <p>Rating: {{review.rating}} Title: {{review.title}} Reviewer: {{review.name}} Comment: {{review.body}}</p>
+                    <div class="col-xs-8 whole-comment">
+                        <div class="col-xs-12 title">
+                            <p>{{review.title}}</p>
+                        </div>
+                        <div class="col-xs-12 rating-name">
+                            <p>Rating: {{review.rating}} By: {{review.name}}</p>
+                        </div>
+                        <div class="col-xs-12 comment-body">
+                            <p>{{review.body}}</p>
+                        </div>
                     </div>
                     <div class="col-xs-2" id="delete-comment">
                         <a class="delete" role="button" ng-click="removeReview(review)">

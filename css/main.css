@@ -39,12 +39,13 @@ main {
 	margin-bottom: 2px;	
 }
 
-#delete-comment {
-	margin-top: 2%;
-}
+/*#delete-comment {
+	margin-top: 3.5%;
+}*/
 
 .delete {
 	color: rgb(238,68,68);
+	font-size: 200%;
 }
 
 .delete:hover {
@@ -67,3 +68,13 @@ main {
 .downvote:hover {
 	color: rgb(238,68,68);
 }
+
+.title {
+	font-size: 200%;
+}
+
+.rating-name {
+	font-weight: 125%;
+	font-size: 125%;
+}
+
