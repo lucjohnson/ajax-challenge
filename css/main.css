@@ -47,6 +47,10 @@ main {
 	color: rgb(238,68,68);
 }
 
+.delete:hover {
+	color: black;
+}
+
 .upvote {
 	color: rgba(137,198,36,0.8);
 	padding-left: 3px;

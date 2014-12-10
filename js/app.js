@@ -27,7 +27,6 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 
 		$scope.refreshReviews = function () {
 			$scope.loading = true;
-			// $http.get(reviewsUrl + '?where={"done" : false}')
 			$http.get(reviewsUrl)
 				.success(function(responseData) {
 					$scope.reviews = responseData.results;
@@ -53,13 +52,49 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 			$scope.newReview = {score: 0};
 
 			$scope.addReview = function(review) {
+				$scope.inserting = true;
 				$http.post(reviewsUrl, review)
 					.success(function(responseData) {
 						review.objectId = responseData.objectId;
-
+						
 						$scope.reviews.push(review);
+					})
+					.error(function(err) {
+						console.log(err);
+					})
+					.finally(function() {
+						$scope.inserting = false;
+					})
+			};
 
-						$scope.newReview = {score: 0};
+			$scope.upvote = function(review) {
+				$http.put(reviewsUrl + '/' + review.objectId, review)
+					.success(function() {
+						$scope.review = {score: review.score++};
+					})
+			};
+
+			$scope.downvote = function(review) {
+				$http.put(reviewsUrl + '/' + review.objectId, review)
+					.success(function() {
+						if (review.score != 0) {
+							$scope.review = {score: review.score--};
+						}
+					})
+			}
+
+			$scope.removeReview = function(review) {
+				$scope.updating = true;
+				$http.delete(reviewsUrl + '/' + review.objectId, review) 
+					.success(function(responseData) {
+
+					})
+					.error(function(err) {
+						console.log(err);
+					})
+					.finally(function() {
+						$scope.updating = false;
+						$scope.refreshReviews();
 					})
 			};
 	});

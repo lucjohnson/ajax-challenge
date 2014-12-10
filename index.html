@@ -80,11 +80,11 @@
 
                  <section ng-repeat="review in reviews" class="col-xs-12">
                     <div class="col-xs-2" id="comment-score">
-                        <a class="upvote" role="button">
+                        <a class="upvote" role="button" ng-click="upvote(review)">
                             <span class="glyphicon glyphicon-chevron-up"></span>
                         </a>
                         <p>{{review.score}}</p>
-                        <a class="downvote" role="button">
+                        <a class="downvote" role="button" ng-click="downvote(review)">
                             <span class="glyphicon glyphicon-chevron-down"></span>
                         </a>
                     </div>
@@ -92,7 +92,7 @@
                         <p>Rating: {{review.rating}} Title: {{review.title}} Reviewer: {{review.name}} Comment: {{review.body}}</p>
                     </div>
                     <div class="col-xs-2" id="delete-comment">
-                        <a class="delete" role="button">
+                        <a class="delete" role="button" ng-click="removeReview(review)">
                             <span class="glyphicon glyphicon-remove-sign"></span>
                         </a>
                     </div>
