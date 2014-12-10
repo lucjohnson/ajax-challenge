@@ -18,7 +18,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia cumque deserunt ullam repudiandae nisi corporis! Ipsum, ducimus commodi, itaque porro distinctio consequuntur! Autem doloremque numquam nemo ex nulla tempora quis! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nihil doloribus excepturi quisquam error possimus veritatis facere, commodi cumque ab atque dolore ducimus obcaecati ipsa, impedit! Consequuntur, eligendi iure cumque!</p>
             </section>
 
-            <section class="col-sm-8" id="comment-form">
+            <section class="col-sm-12" id="comment-form">
                 <h2>Add a Comment</h2>
                 <!--  
                 put a form here for entering a new comment
@@ -28,7 +28,7 @@
                 http://angular-ui.github.io/bootstrap/#/rating
                 their script file is included below
                 -->
-                <form ng-submit="addReview(newReview)" class="form-horizontal">
+                <form ng-submit="addReview(newReview)" class="form-horizontal col-sm-8">
                     <div class="form-group">
                         <label for="rating" class="col-sm-2 control-label">Rating</label>
                         <div class="col-sm-10 field" id="rating">
@@ -66,35 +66,35 @@
                 </form>
             </section>
 
-            <section class="col-sm-12">
-                <h2>Comments</h2>
+            <section class="col-xs-12" id="current-comments">
+                <h2 class="col-xs-2">Comments</h2>
                 <!-- 
                 display existing comments here
                 each comment should also have UI allowing the user to vote up/down the comment
                 as well as delete it
                  -->
-                 <p>
+                 <p class="col-md-6 col-xs-12">
                     <button class="btn btn-primary" ng-click="refreshReviews()">Refresh</button>
-                    <img src="img/ajax-spinner.gif" alt="loading animation" ng-if="loading || updating"/>
+                    <img src="img/ajax-spinner-sm.gif" alt="loading animation" ng-if="loading || updating"/>
                  </p>
-           <!--       <section>
-                    <button class="btn btn-success glyphicon glyphicon-chevron-up"></button>
-                    <p>{{review.score}}</p>
-                    <button class="btn btn-danger glyphicon glyphicon-chevron-down"></button>
-                 </section> -->
 
-                 <section ng-repeat="review in reviews" class="col-sm-12">
-                    <div class="col-sm-2" id="comment-score">
-                        <p>
-                            <button class="btn btn-success glyphicon glyphicon-chevron-up" id="upvote"></button>
-                        </p>
+                 <section ng-repeat="review in reviews" class="col-xs-12">
+                    <div class="col-xs-2" id="comment-score">
+                        <a class="upvote" role="button">
+                            <span class="glyphicon glyphicon-chevron-up"></span>
+                        </a>
                         <p>{{review.score}}</p>
-                        <p>
-                            <button class="btn btn-danger glyphicon glyphicon-chevron-down" id="downvote"></button>
-                        </p>
+                        <a class="downvote" role="button">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
                     </div>
-                    <div class="col-sm-10">
+                    <div class="col-xs-8">
                         <p>Rating: {{review.rating}} Title: {{review.title}} Reviewer: {{review.name}} Comment: {{review.body}}</p>
+                    </div>
+                    <div class="col-xs-2" id="delete-comment">
+                        <a class="delete" role="button">
+                            <span class="glyphicon glyphicon-remove-sign"></span>
+                        </a>
                     </div>
                  </section>
             </section>

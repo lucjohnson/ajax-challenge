@@ -28,4 +28,38 @@ main {
 
 #comment-score {
 	text-align: center;
+	font-size: 150%;
+}
+
+#current-comments h2 {
+	margin-top: 0%;
+}
+
+.ng-binding {
+	margin-bottom: 2px;	
+}
+
+#delete-comment {
+	margin-top: 2%;
+}
+
+.delete {
+	color: rgb(238,68,68);
+}
+
+.upvote {
+	color: rgba(137,198,36,0.8);
+	padding-left: 3px;
+}
+
+.upvote:hover {
+	color: rgb(137,198,36);
+}
+
+.downvote {
+	color: rgba(238,68,68,0.8);
+}
+
+.downvote:hover {
+	color: rgb(238,68,68);
 }
