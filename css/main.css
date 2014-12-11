@@ -5,17 +5,36 @@
 body {
     font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', sans-serif;
     font-weight: 400;
-    /*background-color: gray;*/
+    background-color: rgb(216,217,218);
 }
 
-main {
-	/*background-color: rgba(0,0,0,0.7);*/
+h1 {
+	font-size: 250%;
+	font-family: 'Ubuntu', 'Helvetica Neue', 'Helvetica', sans-serif;
+}
+
+section + section {
+	margin-top: 20px;
+}
+
+section {
+	border: rgba(153,153,153,1.0) solid 1px;
 }
 
 .product-picture {
     float: left;
-    height: 130px;
+    height: 250px;
     margin-right: 10px;
+    padding-top: 30px;
+}
+
+#each-review {
+	border: none;
+	border-bottom: rgba(0,0,0,.1) solid 2px;
+}
+
+#product-description {
+	background-color: white;
 }
 
 #rating {
@@ -23,12 +42,17 @@ main {
 }
 
 #comment-form {
-	/*background-color: rgba(255,255,255,0.7);*/
+	background-color: white;
 }
 
 #comment-score {
 	text-align: center;
 	font-size: 150%;
+}
+
+#current-comments {
+	background-color: white;
+	padding-top: 20px;
 }
 
 #current-comments h2 {
@@ -38,10 +62,6 @@ main {
 .ng-binding {
 	margin-bottom: 2px;	
 }
-
-/*#delete-comment {
-	margin-top: 3.5%;
-}*/
 
 .delete {
 	color: rgb(238,68,68);
@@ -71,10 +91,31 @@ main {
 
 .title {
 	font-size: 200%;
+	font-weight: bold;
 }
 
 .rating-name {
 	font-weight: 125%;
 	font-size: 125%;
+}
+
+.upvote, .downvote {
+	font-size: 115%;
+}
+
+#message {
+	color: red;
+}
+
+#no-comments {
+	text-align: center;
+	font-size: 175%;
+	padding-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+	.product-picture {
+		display: none;
+	}
 }
 

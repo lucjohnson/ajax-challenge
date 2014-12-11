@@ -12,54 +12,56 @@
     <body>
 
         <main class="container" ng-app="ProductReviewer" ng-controller="ReviewsController">
-            <section class="col-sm-12">
+            <section class="col-xs-12" id="product-description">
                 <img src="img/super-bass-o-matic-76.jpg" alt="product picture" class="product-picture">
                 <h1>The Super Bass-o-Matic '76</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia cumque deserunt ullam repudiandae nisi corporis! Ipsum, ducimus commodi, itaque porro distinctio consequuntur! Autem doloremque numquam nemo ex nulla tempora quis! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nihil doloribus excepturi quisquam error possimus veritatis facere, commodi cumque ab atque dolore ducimus obcaecati ipsa, impedit! Consequuntur, eligendi iure cumque!</p>
+                <p>How many times has this happened to you? You have a bass, and you're trying to find an exciting new way to prepare it for the dinner table. You could scale the bass, remove the bass' tail, head and bones, and serve the fish as you would any other fish dinner. But why bother, now that you can use Rovco's amazing new kitchen tool, the Super Bass-o-Matic '76. Yes, fish-eaters, the days of troublesome scaling, cutting and gutting are over, because Super Bass-o-Matic '76 is the tool that lets you use the bass with no fish waste, and without scaling, cutting or gutting. 
+
+                Here's how it works: Catch a bass, remove the hook, and drop the bass - that's the whole bass - into the Super Bass-o-Matic '76. Now, adjust the control dial so that the bass is blended just the way you like it. Yes, it's that simple!
+
+                We've got fish here, fast and easy and ready to pour, mmm-mmm! Super Bass-o-Matic '76 comes with ten interchangeable rotors, a nine-month guarantee, and a booklet: 1,001 Ways to Harness Bass. Super Bass-o-Matic '76 works great on sunfish, perch, sole, and other xsall aquatic creatures.
+
+                Super Bass-o-Matic '76 - it's clean, simple, and after five or ten fish, it gets to be quite a rush! Super Bass-o-Matic '76 - you'll never have to scale, cut or gut again! </p>
             </section>
 
-            <section class="col-sm-12" id="comment-form">
-                <h2>Add a Comment</h2>
-                <!--  
-                put a form here for entering a new comment
-                the user must select a rating, and enter a name, title, and comment body
-                before the comment can be saved to the server
-                for the rating selection, use the Angular Bootstrap Rating directive 
-                http://angular-ui.github.io/bootstrap/#/rating
-                their script file is included below
-                -->
-                <form ng-submit="addReview(newReview)" class="form-horizontal col-sm-12">
+            <section class="col-xs-12" id="comment-form">
+                <h2 class="col-xs-12">Add a Comment</h2>
+
+                <form ng-submit="addReview(newReview)" class="form-horizontal col-xs-12 col-sm-offset-1">
                     <div class="form-group">
-                        <label for="rating" class="col-sm-2 control-label">Rating</label>
-                        <div class="col-sm-10 field" id="rating">
+                        <label for="rating" class="col-xs-2 control-label">Rating</label>
+                        <div class="col-sm-6 col-xs-12 field" id="rating">
                             <rating ng-model="newReview.rating" name="rating" max="max"></rating>
+                        </div>
+                        <div> 
+                            <p id="message"></p>
                         </div>
                     </div>     
 
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">Name</label>
-                        <div class="col-sm-6 field">
+                        <label for="name" class="col-xs-2 control-label">Name</label>
+                        <div class="col-sm-6 col-xs-12 field">
                             <input class="form-control" type="text" name="name" placeholder="your name" ng-model="newReview.name">
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="title" class="col-sm-2 control-label">Title</label>
-                        <div class="col-sm-6 field">
+                        <label for="title" class="col-xs-2 control-label">Title</label>
+                        <div class="col-sm-6 col-xs-12 field">
                             <input class="form-control" type="text" name="title" placeholder="title your comment" ng-model="newReview.title">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="comment" class="col-sm-2 control-label">Comment</label>
-                        <div class="col-sm-6 field">
+                        <label for="comment" class="col-xs-2 control-label">Comment</label>
+                        <div class="col-sm-6 col-xs-12 field">
                             <textarea class="form-control" name="comment" rows="3" placeholder="comment..." ng-model="newReview.body"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-8 text-right">
-                            <button type="submit" class="btn btn-primary" ng-disabled="inserting">Submit Comment!</button>
+                        <div class="col-xs-8 text-right">
+                            <button type="submit" class="btn btn-primary" ng-hide="inserting">Submit Comment!</button>
                             <img src="img/ajax-spinner.gif" alt="loading animation" ng-if="inserting"/>
                         </div>
                     </div>
@@ -68,17 +70,15 @@
 
             <section class="col-xs-12" id="current-comments">
                 <h2 class="col-xs-2">Comments</h2>
-                <!-- 
-                display existing comments here
-                each comment should also have UI allowing the user to vote up/down the comment
-                as well as delete it
-                 -->
-                 <p class="col-md-6 col-xs-12">
+
+                <p class="col-md-6 col-xs-12">
                     <button class="btn btn-primary" ng-click="refreshReviews()">Refresh</button>
                     <img src="img/ajax-spinner-sm.gif" alt="loading animation" ng-if="loading || updating"/>
-                 </p>
+                </p>
 
-                 <section ng-repeat="review in reviews" class="col-xs-12">
+                <p class="col-xs-12" id="no-comments"></p>
+
+                <section ng-repeat="review in reviews | orderBy : -score" class="col-xs-12" id="each-review">
                     <div class="col-xs-2" id="comment-score">
                         <a class="upvote" role="button" ng-click="upvote(review)">
                             <span class="glyphicon glyphicon-chevron-up"></span>
@@ -104,7 +104,7 @@
                             <span class="glyphicon glyphicon-remove-sign"></span>
                         </a>
                     </div>
-                 </section>
+                </section>
             </section>
 
         </main>

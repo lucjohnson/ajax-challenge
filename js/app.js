@@ -17,20 +17,22 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 		$scope.rating = 0;
 		$scope.max = 5;
 
-		$scope.newReview = {score: 0};
-		// $scope.hoveringOver = function(value) {
-		// 	$scope.overStar = value;
-		// };
-
 		$scope.ratingStates = [
 			{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
 		];
 
+		$scope.newReview = {score: 0};
+
 		$scope.refreshReviews = function () {
 			$scope.loading = true;
-			$http.get(reviewsUrl)
+			$http.get(reviewsUrl + '?order=-score')
 				.success(function(responseData) {
 					$scope.reviews = responseData.results;
+					if (responseData.results.length == 0) {
+						document.getElementById("no-comments").innerHTML = "No comments yet. Be the first to review this!";
+					} else {
+						document.getElementById("no-comments").innerHTML = "";
+					}
 				})
 				.error(function(err) {
 					console.log(err);
@@ -50,29 +52,39 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 
 			$scope.refreshReviews();
 
-			// $scope.newReview = {score: 0};
-
 			$scope.addReview = function(review) {
 				$scope.inserting = true;
-				$http.post(reviewsUrl, review)
-					.success(function(responseData) {
-						review.objectId = responseData.objectId;
-						
-						$scope.reviews.push(review);
-					})
-					.error(function(err) {
-						console.log(err);
-					})
-					.finally(function() {
-						$scope.inserting = false;
-					})
+				if (review.name !== undefined && review.title !== undefined && review.body !== undefined && review.rating !== undefined) {
+					$http.post(reviewsUrl, review)
+						.success(function(responseData) {
+							review.objectId = responseData.objectId;
+							
+							$scope.reviews.push(review);
+
+							$scope.newReview = {score: 0};
+						})
+						.error(function(err) {
+							console.log(err);
+						})
+						.finally(function() {
+							$scope.inserting = false;
+							document.getElementById('message').innerHTML = ""; 
+							$scope.refreshReviews();
+						})
+				} else {
+					$scope.inserting = false;
+					document.getElementById('message').innerHTML = "Please fill in all fields"; 
+				}
 			};
 
 			$scope.upvote = function(review) {
 				$scope.review = {score: review.score++};
 				$http.put(reviewsUrl + '/' + review.objectId, review)
 					.success(function() {
-						
+
+					})
+					.error(function(err) {
+						console.log(err);
 					})
 			};
 
@@ -83,6 +95,9 @@ angular.module('ProductReviewer', ['ui.bootstrap'])
 				$http.put(reviewsUrl + '/' + review.objectId, review)
 					.success(function() {
 
+					})
+					.error(function(err) {
+						console.log(err);
 					})
 			}
 
